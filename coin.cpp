@@ -2,6 +2,9 @@
 #include <iostream>
 #include <ctime>
 #include <windows.h>
+#include <fstream>
+
+using namespace std;
 
 int seed()
 {
@@ -20,6 +23,13 @@ int main()
 
     printf("How many do you want Small loop : ");
     scanf("%d",&small_loop);
+
+    ofstream myfile ("example.txt");
+    if (myfile.is_open())
+    {
+        myfile << "Big loop : " << big_loop;
+        myfile << "\nSmall loop : " << small_loop;
+    }
 
     for (int s_l = 1; s_l <= big_loop; s_l++)
     {
@@ -42,7 +52,8 @@ int main()
             } while (head != tail);
 
             /*printf("%d : %d\n", i, count);*/
-            printf("%d\n", count);
+            myfile << "\n" << count;
+            /*printf("%d\n", count);*/
 
             if (max < count) max = count;
             if (min == 0 || min > count) min = count;
@@ -53,9 +64,9 @@ int main()
 
         average = all / small_loop;
 
-        printf("%d", s_l);
-        printf("\naverage is : %.2f", average);
-        printf("\nmin : %d max : %d\n\n", min, max);
+        printf("%d\n", s_l);
+        /*printf("\naverage is : %.2f", average);
+        printf("\nmin : %d max : %d\n\n", min, max);*/
         
     }
     
